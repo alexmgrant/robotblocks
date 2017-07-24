@@ -28,21 +28,29 @@ getPrompt = () => {
 
     if (result.command === '1' || result.command === 'move a onto b') {
       prompt.get(['blockA', 'blockB'], (err, result) => {
-        console.log(result);
+        moveAOntoB(Number(result.blockA), Number(result.blockB));
       });
     }
 
-    if (result.command === '2' || result.command === 'move a over b')
-      moveAOverB(0, 1);
+    if (result.command === '2' || result.command === 'move a over b') {
+      prompt.get(['blockA', 'blockB'], (err, result) => {
+        moveAOverB(Number(result.blockA), Number(result.blockB));
+      });
+    }
 
-    if (result.command === '3' || result.command === 'pile a onto b')
-      pileAOntoB(0, 3);
+    if (result.command === '3' || result.command === 'pile a onto b') {
+      prompt.get(['blockA', 'blockB'], (err, result) => {
+        pileAOntoB(Number(result.blockA), Number(result.blockB));
+      });
+    }
 
+    if (result.command === '4' || result.command === 'pile a over b') {
+      prompt.get(['blockA', 'blockB'], (err, result) => {
+        pileAOverB(Number(result.blockA), Number(result.blockB));
+      });
+    }
 
-    if (result.command === '4' || result.command === 'pile a over b')
-      pileAOverB(0, 1)
-
-    if (result.command === '5' || result.command === 'quit')
+    if (result.command === '5' || result.command === 'exit')
       prompt.stop();
 
     if (result.command === '6' || result.command === 'run sample input') {
@@ -65,6 +73,13 @@ getPrompt = () => {
     }
   });
 }
+
+getBlockInput = () => {
+  prompt.get(['blockA', 'blockB'], (err, result) => {
+    return result;
+  });
+}
+
 
 onErr = (err) => {
   console.log(err);
